@@ -1,0 +1,14 @@
+# Ensure the rewrite engine is on
+RewriteEngine On
+
+# Allow existing files and folders to load normally
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# If it's a SPA, fallback to index.html
+# (optional — if you're not using a router like React, you can delete this)
+RewriteRule ^ index.html [L]
+
+# Allow missing audio files to return 404 (no redirect)
+# Prevent catch-all rules from affecting media
+RewriteCond %{REQUEST_URI} !\.(mp3|wav|ogg)$

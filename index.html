@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nature Gestures</title>
+
+  <!-- Style & Favicon -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+  <!-- ✅ Load Tone.js globally BEFORE main.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.39/Tone.min.js"></script>
+</head>
+
+<body>
+  <noscript>
+    <div style="color: red; text-align: center; padding: 1em;">
+      JavaScript is required to experience Nature Gestures. Please enable it in your browser.
+    </div>
+  </noscript>
+
+  <div class="container">
+    <img src="assets/Images/NatureGestures_Logo_250530_01.svg" alt="Nature Gestures Logo" class="logo" />
+    <h1>🎵 Nature Gestures Soundscape</h1>
+    <p id="status">Click the button to begin 🌬</p>
+    <button id="startButton">Start Music 🌈</button>
+    <audio id="ambientPlayer" src="assets/AmbientSoundMP3s/ambient-rain.mp3" loop></audio>
+
+    <!-- ⏳ Timer & Beat -->
+    <div id="timer" style="font-family: monospace; font-size: 1.2em; margin-top: 10px;">
+      ⏳ Time since last update: 00:00
+    </div>
+    <div id="beat" style="margin-top: 10px; width: 12px; height: 12px; background: grey; border-radius: 50%; transition: background 0.2s ease;"></div>
+  </div>
+
+  <!-- 🎛️ Sound Controls Panel (Left Bottom) -->
+<div id="controls" class="panel-box" style="
+  position: fixed;
+  bottom: 1rem;
+  left: 1rem;
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(8px);
+  padding: 1rem;
+  border-radius: 12px;
+  font-family: sans-serif;
+  color: white;
+  max-width: 260px;
+  z-index: 999;">
+  <h3>🎛️ Sound Levels</h3>
+
+  <div>
+    <label>🌫️ Drone</label><br>
+    <input type="range" id="droneVolumeSlider" min="0" max="100" autocomplete="off">
+  </div><br>
+
+  <div>
+    <label>🔔 Chimes</label><br>
+    <input type="range" id="chimeVolumeSlider" min="0" max="100" autocomplete="off">
+  </div><br>
+
+  <div>
+    <label>🌧️ Ambient</label><br>
+    <input type="range" id="ambientVolumeSlider" min="0" max="100" autocomplete="off">
+  </div><br>
+
+  <div>
+    <label>🥁 Drums</label><br>
+    <input type="range" id="drumVolumeSlider" min="0" max="100" autocomplete="off">
+  </div><br>
+
+  <div>
+    <label>🌫️ Noise</label><br>
+    <input type="range" id="noiseVolumeSlider" min="0" max="100" autocomplete="off">
+  </div><br>
+
+  <div>
+    <label>🎹 Piano</label><br>
+    <input type="range" id="pianoVolumeSlider" min="0" max="100" autocomplete="off">
+  </div><br>
+
+  <div>
+    <label>🎸 Bass</label><br>
+    <input type="range" id="bassVolumeSlider" min="0" max="100" autocomplete="off">
+  </div><br>
+
+  <div>
+    <label>🎻 Strings</label><br>
+    <input type="range" id="stringsVolumeSlider" min="0" max="100" autocomplete="off">
+  </div><br>
+
+  <div>
+    <label>🎷 Winds</label><br>
+    <input type="range" id="windsVolumeSlider" min="0" max="100" autocomplete="off">
+  </div>
+</div>
+
+
+  <!-- 🧪 Sound Environment Tester (Bottom Center) -->
+  <div id="envControls" class="panel-box" style="
+    position: fixed;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(8px);
+    padding: 1rem;
+    border-radius: 12px;
+    font-family: sans-serif;
+    color: white;
+    z-index: 999;">
+    <h3>🧪 Sound Environment Tester</h3>
+
+    <label>Biome:
+      <select id="biomeSelect">
+        <option>Forest</option>
+        <option>Desert</option>
+        <option>Urban</option>
+        <option>Coastal</option>
+      </select>
+    </label><br>
+
+    <label>Condition:
+      <select id="conditionSelect">
+        <option>Clear</option>
+        <option>Rain</option>
+        <option>Snow</option>
+        <option>Cloudy</option>
+        <option>Fog</option>
+      </select>
+    </label><br>
+
+    <label>Season:
+      <select id="seasonSelect">
+        <option>Spring</option>
+        <option>Summer</option>
+        <option>Autumn</option>
+        <option>Winter</option>
+      </select>
+    </label><br>
+
+    <label>Time of Day:
+      <select id="timeOfDaySelect">
+        <option>Dawn</option>
+        <option>Day</option>
+        <option>Dusk</option>
+        <option>Night</option>
+      </select>
+    </label><br>
+
+    <button id="applyEnv">Apply Environment</button>
+  </div>
+
+  <!-- 🎧 Now Playing Panel (Right Bottom) -->
+  <div id="nowPlayingPanel" class="panel-box" style="
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    max-width: 300px;
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: white;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(8px);
+    padding: 1rem;
+    border-radius: 12px;
+    z-index: 1000;">
+    <strong>🎧 Now Playing</strong><br>
+    <div id="nowPlayingContent">Loading...</div>
+  </div>
+
+  <!-- 🚀 JS Entry Point -->
+  <script type="module" src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+# ✅ Enable rewrite engine
+RewriteEngine On
+
+# ✅ Let existing files and directories through
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# ✅ Optional: fallback to index.html for SPA (comment out if not needed)
+# RewriteRule ^ index.html [L]
+
+# ✅ Ensure missing media files (like .wav) return 404 and not redirect
+RewriteCond %{REQUEST_URI} !\.(mp3|wav|ogg)$

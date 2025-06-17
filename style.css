@@ -1,0 +1,110 @@
+/* Font & Reset */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Comfortaa', cursive;
+  background: linear-gradient(to top, #0d1b2a, #1b263b);
+  color: #fff;
+  overflow-x: hidden;
+  text-align: center;
+}
+
+/* Layout */
+.container {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Logo */
+.logo {
+  width: 180px;
+  margin: 1rem 0;
+}
+
+/* Title & Subtitle */
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #dbe9f4;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  color: #a0c4ff;
+}
+
+/* Canvas */
+canvas {
+  border: none;
+  margin-top: 2rem;
+  max-width: 100%;
+  height: auto;
+  background: transparent;
+}
+
+/* Status Text */
+#status {
+  margin-top: 2rem;
+  font-size: 1rem;
+  color: #fefae0;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.8rem 1.2rem;
+  border-radius: 12px;
+  backdrop-filter: blur(5px);
+  max-width: 90%;
+}
+
+/* 🌌 Unified Panel Style */
+.panel-box {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem 0;
+  max-width: 90%;
+  backdrop-filter: blur(6px);
+  color: #fefae0;
+  font-size: 1rem;
+  text-align: left;
+}
+
+/* Environment Controls Panel (specific tweak) */
+#envControls {
+  max-width: 300px; /* Optional override for smaller width */
+}
+
+/* Form Controls Styling */
+#envControls select,
+#envControls button {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  background: #1b263b;
+  color: #fff;
+  appearance: none;
+}
+
+#envControls button {
+  background: #4cc9f0;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+#envControls button:hover {
+  background: #90e0ef;
+}
+
+#envControls label {
+  display: block;
+  margin-bottom: 0.25rem;
+}
